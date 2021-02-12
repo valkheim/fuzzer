@@ -12,7 +12,7 @@
 #endif
 
 #ifndef DEBUG
-# define CLS() (printf("\e[1;1H\e[2J"))
+# define CLS() (printf("\033[1;1H\033[2J"))
 #else
 # define CLS() IDLE
 #endif
