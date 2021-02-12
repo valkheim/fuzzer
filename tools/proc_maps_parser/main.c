@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <errno.h>
+#include <err.h>
 
 #define PATH_LEN (128)
 #define LINE_LEN (512)
@@ -74,8 +75,7 @@ static void parse(pid_t pid)
   fh = fopen(path, "r");
   if (fh == NULL)
   {
-    printf("Cannot open %s (%d)", path, errno);
-    exit(1);
+    errx(1, "Cannot open %s (%d)\n", path, errno);
   }
 
   char *line = malloc(LINE_LEN * sizeof(*line));
