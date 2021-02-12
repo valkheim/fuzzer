@@ -99,7 +99,7 @@ static void log_crash(mutation_t *mutation, int signum, struct user_regs_struct 
   FILE *fptr;
   char path[PATH_MAX];
 
-  sprintf(path, "crashes/%s.%llx", sys_siglist[signum], registers->rip - 1);
+  sprintf(path, "crashes/%s.%llx", strsignal(signum), registers->rip - 1);
   fptr = fopen(path, "wb");
   fwrite(mutation->data, 1, mutation->length, fptr);
   fclose(fptr);

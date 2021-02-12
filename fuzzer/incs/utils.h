@@ -17,40 +17,5 @@
 # define CLS() IDLE
 #endif
 
-static char * const sys_siglist[] = {
-  "",
-  "sighup",
-  "sigint",
-  "sigquit",
-  "sigill",
-  "sigtrap",
-  "sigabrt",
-  "sigemt",
-  "sigfpe",
-  "sigkill",
-  "sigbus",
-  "sigsegv",
-  "sigsys",
-  "sigpipe",
-  "sigalrm",
-  "sigterm",
-  "sigurg",
-  "sigstop",
-  "sigtstp",
-  "sigcont",
-  "sigchld",
-  "sigttin",
-  "sigttou",
-  "sigio",
-  "sigxcpu",
-  "sigxfsz",
-  "sigvtalrm",
-  "sigprof",
-  "sigwinch",
-  "siginfo",
-  "sigusr1",
-  "sigusr2",
-};
-
 int ferr(char *label, char *file, int line);
 void ferrx(char *label, char *file, int line);
