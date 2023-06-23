@@ -28,20 +28,20 @@ static int usage(void)
   return 2;
 }
 
-#if 0
-static void print_full_line(line_t *line)
+#if 1
+static void print_line(line_t *line)
 {
   printf("%llx-%llx %4s %llx %x:%x %d %s\n",
       line->from, line->to, line->flags, line->offset, line->major,
       line->minor, line->inode, line->location);
 }
-
-static int filter(line_t *line)
+#else
+static void print_line(line_t *line)
 {
-  if (line->flags[0] != 'r' || line->flags[1] != 'w')
-    return 0;
-
-  return 1;
+    printf("offset: %llx\tlength: %llx\n",
+      line->from,
+      line->to - line->from
+    );
 }
 #endif
 
@@ -50,21 +50,11 @@ static void read_line(char *input)
 {
   line_t line = { 0, 0, 0, "", 0, 0, 0, "" };
   sscanf(input, "%llx-%llx %4s %llx %x:%x %d %128s[^\n]",
-      &line.from, &line.to, line.flags, &line.offset, &line.major,
-      &line.minor, &line.inode, (char*)&line.location);
+      &line.from, &line.to, line.flags, &line.offset,
+      (unsigned int *)&line.major, (unsigned int *)&line.minor, &line.inode,
+      (char*)&line.location);
 
   g_lines[g_line_idx++] = line;
-}
-
-static void print_lines()
-{
-  for (unsigned int i = 0 ; i < g_line_idx ; ++i)
-  {
-    printf("offset: %llx\tlength: %llx\n",
-      g_lines[i].from,
-      g_lines[i].to - g_lines[i].from
-    );
-  }
 }
 
 static void parse(pid_t pid)
@@ -84,7 +74,8 @@ static void parse(pid_t pid)
     read_line(line);
   }
 
-  print_lines();
+  for (unsigned int i = 0 ; i < g_line_idx ; ++i)
+    print_line(&g_lines[i]);
 
   free(line);
 }

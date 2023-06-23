@@ -1,2 +1,12 @@
+NAME = proc_maps_parser
+
+CFLAGS = -Wall -Werror -Wextra -Wpedantic
+
 all:
-	gcc -Werror -Wall -Wextra main.c -o proc_maps_parser
+	$(CC) $(CFLAGS) main.c -o $(NAME)
+	@echo "[+] $(NAME): compiled!"
+
+clean:
+	$(RM) $(NAME)
+
+re: clean all

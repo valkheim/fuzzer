@@ -17,7 +17,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(LDFLAGS) -o $(NAME) $(OBJS)
-	@echo "\033[38;5;10m=== $(NAME): Compiled !\033[0m"
+	@echo "\033[38;5;10m=== $(NAME): compiled!\033[0m"
 
 $(D_OBJS)/%.o: $(D_SRCS)/%.c Makefile
 	@mkdir -p $(dir $@)
